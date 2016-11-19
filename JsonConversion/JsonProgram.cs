@@ -36,11 +36,18 @@ namespace JsonConversion
                 product.id = int.Parse(x.Key);
                 product.name = oldProduct.name;
                 product.price = oldProduct.price;
+                if (product.price.Value is string)
+                {
+                    Console.Out.WriteLine("Calaculate:");
+                    Console.Out.WriteLine(product.price);
+                    Console.Out.WriteLine(outputConstants);
+                    Console.Out.WriteLine("--end--");
+                }
                 product.count = oldProduct.count;
                 outputProducts.Add(product);
             }
             v3.products = outputProducts;
-            v3.ToString();
+            v3 = MakeSingleQuotes(new string[] {"name", "price", "count"}, v3.ToString());
             Console.Write(v3);
         }
 
