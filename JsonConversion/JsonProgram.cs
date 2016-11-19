@@ -7,8 +7,8 @@ namespace JsonConversion
 	{
 		static void Main()
 		{
-			string json = Console.In.ReadToEnd();
-		    //string json = Console.In.ReadLine();
+			//string json = Console.In.ReadToEnd();
+		    string json = Console.In.ReadLine();
 			JObject v2 = JObject.Parse(json);
 			dynamic v3 = new JObject();
 		    v3.version = "3";
@@ -19,8 +19,11 @@ namespace JsonConversion
 		    foreach (var x in inputProducts)
 		    {
                 dynamic product = new JObject();
-		        product = x.Value;
+                dynamic oldProduct = x.Value;
                 product.id = x.Key;
+                product.name = oldProduct.name;
+		        product.price = oldProduct.price;
+		        product.count = oldProduct.count;
                 outputProducts.Add(product);
             }
 		    v3.products = outputProducts;
