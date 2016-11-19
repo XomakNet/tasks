@@ -70,8 +70,10 @@ namespace SimQLTask
 		            }
 
 		        }
-                
-                queriesResults.Add(Join(".", queryParams) + " = " + valueResult);
+
+		        var queryResultStr = Join(".", queryParams) + (valueResult.Equals("") ? "" : " = " + valueResult);
+
+                queriesResults.Add(queryResultStr);
 		    }
 
             return queriesResults;
