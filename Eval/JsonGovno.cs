@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
@@ -13,6 +10,9 @@ namespace EvalTask
     {
         public static string Replace(string json, string expression)
         {
+            if (string.IsNullOrWhiteSpace(json))
+                return expression;
+
             var vars = JObject.Parse(json);
 
             var replaceDictionary = new Dictionary<string, double>();
