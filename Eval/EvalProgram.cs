@@ -7,8 +7,12 @@ namespace EvalTask
 		static void Main(string[] args)
 		{
 		    string input = Console.In.ReadLine();//ReadToEnd();
-			string output = "TODO";
+
+
+
+			string output = new Calculator(input).Calc().ToString();
 			Console.WriteLine(output);
 		}
+
 	}
 }

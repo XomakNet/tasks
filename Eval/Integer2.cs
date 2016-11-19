@@ -8,5 +8,9 @@
         {
             value = double.Parse(number);
         }
+        public override double Calculate()
+        {
+            return value;
+        }
     }
 }

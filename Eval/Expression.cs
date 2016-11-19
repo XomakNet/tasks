@@ -6,16 +6,45 @@ using System.Threading.Tasks;
 
 namespace EvalTask
 {
-    class Expression
+    public class Expression : AExpression
     {
-        Expression left, right;
+        AExpression left, right;
         char op;
 
-        public Expression(char oper, Expression result, Expression right2)
+        public Expression(char oper, AExpression result, AExpression right2)
         {
             op = oper;
             left = result;
             right = right2;
+        }
+
+        public override double Calculate()
+        {
+            double result = left.Calculate();
+
+            if (right != null && op != 0)
+            {
+                switch (op)
+                {
+                    case '+': return result + right.Calculate();
+                    case '-': return result - right.Calculate();
+                    case '*': return result * right.Calculate();
+                    case '/':
+                        double rightCalc = right.Calculate();
+                        if (rightCalc < 0.0000000001)
+                        {
+                            return result / rightCalc;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Error: devision by zero");
+                            return 0;
+                        }
+                    default: return 0;
+                }
+            }
+
+            return result;
         }
     }
 }
