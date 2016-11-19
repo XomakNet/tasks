@@ -31,7 +31,7 @@ namespace SimQLTask
 		    foreach (var queryParams in queries.Select(q => q.Split('.')))
 		    {
 		        var tempResult = data;
-		        JValue valueResult = null;
+		        string valueResult = null;
 		        
 		        foreach (var queryParam in queryParams)
 		        {
@@ -45,13 +45,13 @@ namespace SimQLTask
 		            }
 		            catch
 		            {
-                        valueResult = (JValue)tempResult[queryParam];
+                        valueResult = tempResult[queryParam].Value<string>();
                     }
 		        }
 
                 CultureInfo cultureInfo = CultureInfo.CreateSpecificCulture("da-DK");
-
-                queriesResults.Add(Join(".", queryParams) + " = " + valueResult.ToString("G", cultureInfo));
+                
+                queriesResults.Add(Join(".", queryParams) + " = " + valueResult.Replace('.', ','));
 		    }
 
             return queriesResults;
