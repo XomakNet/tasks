@@ -18,7 +18,7 @@ namespace EvalTask
             foreach (var v in vars)
                 replaceDictionary.Add(v.Key, Convert.ToDouble(v.Value));
             
-            return replaceDictionary.OrderBy(i => i.Key.Length)
+            return replaceDictionary.OrderByDescending(i => i.Key.Length)
                 .Aggregate(expression, (current, value) => current.Replace(value.Key, value.Value.ToString()));
         }
     }

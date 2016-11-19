@@ -11,6 +11,7 @@ namespace EvalTask
 		{
 		    string input = Console.In.ReadLine();
 		    string json = Console.In.ReadLine();//ReadToEnd();
+		    var kek = JsonGovno.Replace(json, input);
             string output = new Calculator(JsonGovno.Replace(json,input)).Calc().ToString();
 			Console.WriteLine(output);
 		}

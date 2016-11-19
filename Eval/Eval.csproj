@@ -60,6 +60,7 @@
     <Compile Include="EvalProgram.cs" />
     <Compile Include="Expression.cs" />
     <Compile Include="Integer2.cs" />
+    <Compile Include="JsonGovno.cs" />
     <Compile Include="Primary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
