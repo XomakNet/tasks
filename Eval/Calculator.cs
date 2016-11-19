@@ -24,8 +24,7 @@ namespace EvalTask
             var ex = CalcAll();
             return 0;
         }
-
-<<<<<<< HEAD
+        
         [Test]
         public void CheckIfCalcReturnEqualNumber()
         {
@@ -38,11 +37,11 @@ namespace EvalTask
         {
             var calc = new Calculator("20+3");
             Assert.AreEqual(23, calc.Calc());
-=======
+        }
+
         private Expression CalcAll()
         {
             return calcTerm();
->>>>>>> de2a4bb8dc30cd509f52dfca0c4bc911280d26e7
         }
 
         private Expression calcTerm()
