@@ -31,27 +31,49 @@ namespace SimQLTask
 		    foreach (var queryParams in queries.Select(q => q.Split('.')))
 		    {
 		        var tempResult = data;
-		        JValue valueResult = null;
-		        
+		        string valueResult = "";
+		        JToken currValue;
+
 		        foreach (var queryParam in queryParams)
 		        {
-		            if (queryParam == "data")
+
+                    if (queryParam == "data")
 		            {
 		                continue;
 		            }
-		            try
+
+		            if (tempResult.TryGetValue(queryParam, out currValue))
 		            {
-		                tempResult = (JObject) tempResult[queryParam];
+		                if (currValue != null)
+		                {
+
+		                    try
+		                    {
+		                        tempResult = (JObject) currValue;
+		                    }
+		                    catch
+		                    {
+		                        valueResult = currValue.Value<string>();
+		                    }
+
+		                }
+		                else
+		                {
+                            valueResult = "";
+                            break;
+                        }
 		            }
-		            catch
+		            else
 		            {
-                        valueResult = (JValue)tempResult[queryParam];
-                    }
+		                valueResult = "";
+		                break;
+		            }
+
 		        }
 
-                CultureInfo cultureInfo = CultureInfo.CreateSpecificCulture("da-DK");
+		        var queryResultStr = Join(".", queryParams) + (valueResult.Equals("") ? "" : " = " + valueResult);
 
-                queriesResults.Add(Join(".", queryParams) + " = " + valueResult.ToString("G", cultureInfo));
+                queriesResults.Add(queryResultStr);
 		    }
 
             return queriesResults;
