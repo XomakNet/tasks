@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using EvalTask;
 using static EvalTask.EvalProgram;
@@ -42,7 +43,7 @@ namespace JsonConversion
                     var result = EvalProgram.DoThings(outputConstants.ToString(), oldProduct.price.Value);
                     try
                     {
-                        product.price = Double.Parse(result);
+                        product.price = Convert.ToDouble(result, CultureInfo.InvariantCulture);
                     }
                     catch (Exception)
                     {
