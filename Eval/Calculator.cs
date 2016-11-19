@@ -20,8 +20,13 @@ namespace EvalTask
 
         public double Calc()
         {
-            //return calcTerm();
+            var ex = CalcAll();
             return 0;
+        }
+
+        private Expression CalcAll()
+        {
+            return calcTerm();
         }
 
         private Expression calcTerm()
@@ -42,13 +47,13 @@ namespace EvalTask
 
             if (IsDigit(CurrentChar()))
             {
-                result = parseInteger();
+                result = ParseInteger();
             }
             else if (CurrentChar() == '(')
             {
                 NextChar();
-                result = Calc();
-                skipNextChar();
+                result = CalcAll();
+                SkipNextChar();
             }
             else
             {
@@ -56,6 +61,27 @@ namespace EvalTask
             }
 
             return result;
+        }
+
+        private void SkipNextChar()
+        {
+            if (cursor + 1 < input.Length)
+            {
+                cursor++;
+            }
+        
+        }
+
+        private Expression ParseInteger()
+        {
+            String number = "";
+
+            do
+            {
+                number += CurrentChar();
+            } while (IsDigit(NextChar()));
+
+            return new Integer2(number);
         }
 
         private bool IsDigit(char currentChar)
