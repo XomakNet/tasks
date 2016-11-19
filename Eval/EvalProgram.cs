@@ -22,7 +22,7 @@ namespace EvalTask
             }
             catch (Exception e)
             {
-                output = e.Message;
+                output = "error";
             }
 
             Console.WriteLine(output);
