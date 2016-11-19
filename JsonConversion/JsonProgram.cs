@@ -39,7 +39,17 @@ namespace JsonConversion
                 product.name = oldProduct.name;
                 if (oldProduct.price.Value is string)
                 {
-                    product.price = Double.Parse(EvalProgram.DoThings(outputConstants.ToString(), oldProduct.price.Value));
+                    var result = EvalProgram.DoThings(outputConstants.ToString(), oldProduct.price.Value);
+                    try
+                    {
+                        product.price = Double.Parse(result);
+                    }
+                    catch (Exception)
+                    {
+                        
+                        throw new Exception(result);
+                    }
+                    
                 }
                 else
                 {
