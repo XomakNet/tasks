@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace EvalTask
 {
-    class Expression
+    class Primary
     {
-        Expression left, right;
-        char op;
     }
 }

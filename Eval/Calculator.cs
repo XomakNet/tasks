@@ -26,8 +26,36 @@ namespace EvalTask
 
         private Expression calcTerm()
         {
-            return new Expression();
-            
+            var ex = calcFactor();
+
+        }
+
+        private Expression calcFactor()
+        {
+            var ex = parsePrimary();
+
+        }
+
+        private Expression parsePrimary()
+        {
+            Expression result = null;
+
+            if (isDigit(currentChar()))
+            {
+                result = parseInteger();
+            }
+            else if (currentChar() == '(')
+            {
+                nextChar();
+                result = parse();
+                skipNextChar();
+            }
+            else
+            {
+                System.out.println("Error: unexpected symbol " + currentChar() + " at " + cursor);
+            }
+
+            return result;
         }
     }
 }
