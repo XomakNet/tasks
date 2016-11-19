@@ -14,11 +14,12 @@ namespace EvalTask
         {
             var vars = JObject.Parse(json);
 
+            var replaceDictionary = new Dictionary<string, double>();
             foreach (var v in vars)
-            {
-                var r = new Regex(v.Key+"{1}");
-            }
-            return "";
+                replaceDictionary.Add(v.Key, Convert.ToDouble(v.Value));
+            
+            return replaceDictionary.OrderBy(i => i.Key.Length)
+                .Aggregate(expression, (current, value) => current.Replace(value.Key, value.Value.ToString()));
         }
     }
 }
