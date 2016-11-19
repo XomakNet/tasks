@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace EvalTask
 {
-    abstract class Primary : AExpression
+    public abstract class AExpression
     {
-        
+        public abstract double Calculate();
     }
 }

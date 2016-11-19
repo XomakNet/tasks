@@ -22,29 +22,47 @@ namespace EvalTask
         public double Calc()
         {
             var ex = CalcAll();
-            return 0;
+            return ex.Calculate();
         }
 
-        private Expression CalcAll()
+        private AExpression CalcAll()
         {
-            return calcTerm();
+            return CalcTerm();
         }
 
-        private Expression calcTerm()
+        private AExpression CalcTerm()
         {
-            var ex = calcFactor();
-            return ex;
+            var result = CalcFactor();
+
+            while (CurrentChar() == '+' || CurrentChar() == '-')
+            {
+                char curChar = CurrentChar();
+                NextChar();
+                AExpression right = CalcFactor();
+                result = new Expression(curChar, result, right);
+            }
+
+            return result;
         }
 
-        private Expression calcFactor()
+        private AExpression CalcFactor()
         {
-            var ex = parsePrimary();
-            return ex;
+            var result = ParsePrimary();
+
+            while (CurrentChar() == '/' || CurrentChar() == '*')
+            {
+                char curChar = CurrentChar();
+                NextChar();
+                AExpression right = ParsePrimary();
+                result = new Expression(curChar, result, right);
+            }
+
+            return result;
         }
 
-        private Expression parsePrimary()
+        private AExpression ParsePrimary()
         {
-            Expression result = null;
+            AExpression result = null;
 
             if (IsDigit(CurrentChar()))
             {
@@ -73,7 +91,7 @@ namespace EvalTask
         
         }
 
-        private Expression ParseInteger()
+        private Primary ParseInteger()
         {
             String number = "";
 
@@ -88,7 +106,7 @@ namespace EvalTask
         private bool IsDigit(char currentChar)
         {
             double d;
-            return double.TryParse("" + currentChar, out d);
+            return double.TryParse("" + currentChar, out d) || currentChar.Equals('.') || currentChar.Equals(',');
         }
 
         private char NextChar()
@@ -117,40 +135,43 @@ namespace EvalTask
             Assert.AreEqual(2, calc.Calc());
         }
 
-
-        [Test]
-        public void CheckIfCalcReturnEqualDoubleNumber()
+        [TestFixture]
+        public class Calculator_Should
         {
-            var calc = new Calculator("1.234");
-            Assert.AreEqual(1.234, calc.Calc(), 0.000001);
-        }
+            [Test]
+            public void CheckIfCalcReturnEqualDoubleNumber()
+            {
+                var calc = new Calculator("1,234");
+                Assert.AreEqual(1.234, calc.Calc(), 0.000001);
+            }
 
-        [Test]
-        public void SimpleAddOperationIsCorrect()
-        {
-            var calc = new Calculator("20+3");
-            Assert.AreEqual(23, calc.Calc(), 0.000001);
-        }
+            [Test]
+            public void SimpleAddOperationIsCorrect()
+            {
+                var calc = new Calculator("20+3");
+                Assert.AreEqual(23, calc.Calc(), 0.000001);
+            }
 
-        [Test]
-        public void SimpleEqualMultiplicationIsCorrect()
-        {
-            var calc = new Calculator("7*11");
-            Assert.AreEqual(77, calc.Calc(), 0.000001);
-        }
+            [Test]
+            public void SimpleEqualMultiplicationIsCorrect()
+            {
+                var calc = new Calculator("7*11");
+                Assert.AreEqual(77, calc.Calc(), 0.000001);
+            }
 
-        [Test]
-        public void NumberInBracesEqualToCalculated()
-        {
-            var calc = new Calculator("(2.12)");
-            Assert.AreEqual(2.12, calc.Calc(), 0.000001);
-        }
+            [Test]
+            public void NumberInBracesEqualToCalculated()
+            {
+                var calc = new Calculator("(2,12)");
+                Assert.AreEqual(2.12, calc.Calc(), 0.000001);
+            }
 
-        [Test]
-        public void OperationsPriorityIsCorrect()
-        {
-            var calc = new Calculator("2+3*2");
-            Assert.AreEqual(8, calc.Calc(), 0.000001);
+            [Test]
+            public void OperationsPriorityIsCorrect()
+            {
+                var calc = new Calculator("2+3*2");
+                Assert.AreEqual(8, calc.Calc(), 0.000001);
+            }
         }
     }
 }

@@ -51,9 +51,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AExpression.cs" />
     <Compile Include="Calculator.cs" />
     <Compile Include="EvalProgram.cs" />
     <Compile Include="Expression.cs" />
+    <Compile Include="Integer2.cs" />
     <Compile Include="Primary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
