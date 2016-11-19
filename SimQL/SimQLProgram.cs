@@ -21,7 +21,7 @@ namespace SimQLTask
 
 		public static IEnumerable<string> ExecuteQueries(string json)
 		{
-            var queries_results = new List<String>();
+            var queriesResults = new List<String>();
 
 		    var jObject = JObject.Parse(json);
 		    var queries = ((JArray) jObject["queries"]).Select(v => v.Value<String>());
@@ -35,6 +35,10 @@ namespace SimQLTask
 		        
 		        foreach (var queryParam in queryParams)
 		        {
+		            if (queryParam == "data")
+		            {
+		                continue;
+		            }
 		            try
 		            {
 		                tempResult = (JObject) tempResult[queryParam];
@@ -47,10 +51,10 @@ namespace SimQLTask
 
                 CultureInfo cultureInfo = CultureInfo.CreateSpecificCulture("da-DK");
 
-                queries_results.Add(Join(".", queryParams) + " = " + valueResult.ToString("0.00", cultureInfo));
+                queriesResults.Add(Join(".", queryParams) + " = " + valueResult.ToString("0.00", cultureInfo));
 		    }
 
-            return queries_results;
+            return queriesResults;
 		}
 	}
 }
