@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Text.RegularExpressions;
+using EvalTask;
+using static EvalTask.EvalProgram;
 
 namespace JsonConversion
 {
@@ -35,13 +37,13 @@ namespace JsonConversion
                 dynamic oldProduct = x.Value;
                 product.id = int.Parse(x.Key);
                 product.name = oldProduct.name;
-                product.price = oldProduct.price;
-                if (product.price.Value is string)
+                if (oldProduct.price.Value is string)
                 {
-                    Console.Out.WriteLine("Calaculate:");
-                    Console.Out.WriteLine(product.price);
-                    Console.Out.WriteLine(outputConstants);
-                    Console.Out.WriteLine("--end--");
+                    product.price = Double.Parse(EvalProgram.DoThings(outputConstants.ToString(), oldProduct.price.Value));
+                }
+                else
+                {
+                    product.price = oldProduct.price;
                 }
                 product.count = oldProduct.count;
                 outputProducts.Add(product);

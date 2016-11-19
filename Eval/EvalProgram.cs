@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace EvalTask
 {
-	class EvalProgram
+	public class EvalProgram
 	{
 		static void Main(string[] args)
 		{
@@ -18,7 +18,7 @@ namespace EvalTask
 			Console.WriteLine(output);
 		}
 
-        private static string DoThings(string json, string input)
+        public static string DoThings(string json, string input)
 	    {
             var replaced = JsonReplacer.Replace(json, input);
             return new Calculator(replaced).Calc().ToString();
