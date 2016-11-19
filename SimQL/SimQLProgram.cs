@@ -32,26 +32,44 @@ namespace SimQLTask
 		    {
 		        var tempResult = data;
 		        string valueResult = null;
-		        
+		        JToken currValue;
+
 		        foreach (var queryParam in queryParams)
 		        {
-		            if (queryParam == "data")
+
+                    if (queryParam == "data")
 		            {
 		                continue;
 		            }
-		            if (tempResult[queryParam] is JObject)
+
+		            if (tempResult.TryGetValue(queryParam, out currValue))
 		            {
-		                tempResult = (JObject) tempResult[queryParam];
+		                if (currValue != null)
+		                {
+
+		                    try
+		                    {
+		                        tempResult = (JObject) currValue;
+		                    }
+		                    catch
+		                    {
+		                        valueResult = currValue.Value<string>();
+		                    }
+
+		                }
+		                else
+		                {
+                            valueResult = "";
+                            break;
+                        }
 		            }
 		            else
 		            {
-                        valueResult = tempResult[queryParam].Value<string>();
-                    }
-
+		                valueResult = "";
+		                break;
+		            }
 
 		        }
-
-                CultureInfo cultureInfo = CultureInfo.CreateSpecificCulture("da-DK");
                 
                 queriesResults.Add(Join(".", queryParams) + " = " + valueResult);
 		    }

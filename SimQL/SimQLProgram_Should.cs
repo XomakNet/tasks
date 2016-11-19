@@ -14,10 +14,10 @@ namespace SimQLTask
 			var results = SimQLProgram.ExecuteQueries(
 				"{" +
 				"'data': {'a':{'x':3.14}}, " +
-				"'queries': ['a.x']" +
+				"'queries': ['a.x', 'b.c']" +
 				"}");
 
-			Assert.AreEqual(new String[] {"a.x = 3.14"}, results.ToArray());
+			Assert.AreEqual(new String[] {"a.x = 3.14", "b.c = "}, results.ToArray());
 		}
 
         [Test]
