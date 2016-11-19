@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace EvalTask
 {
-    class Primary
+    class Primary : Expression
     {
+
     }
 }

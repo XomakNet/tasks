@@ -18,7 +18,7 @@ namespace EvalTask
             cursor = 0;
         }
 
-        public double Calc(string str)
+        public double Calc()
         {
             //return calcTerm();
             return 0;
@@ -27,35 +27,60 @@ namespace EvalTask
         private Expression calcTerm()
         {
             var ex = calcFactor();
-
+            return ex;
         }
 
         private Expression calcFactor()
         {
             var ex = parsePrimary();
-
+            return ex;
         }
 
         private Expression parsePrimary()
         {
             Expression result = null;
 
-            if (isDigit(currentChar()))
+            if (IsDigit(CurrentChar()))
             {
                 result = parseInteger();
             }
-            else if (currentChar() == '(')
+            else if (CurrentChar() == '(')
             {
-                nextChar();
-                result = parse();
+                NextChar();
+                result = Calc();
                 skipNextChar();
             }
             else
             {
-                System.out.println("Error: unexpected symbol " + currentChar() + " at " + cursor);
+                Console.WriteLine("Error: unexpected symbol " + CurrentChar() + " at " + cursor);
             }
 
             return result;
+        }
+
+        private bool IsDigit(char currentChar)
+        {
+            double d;
+            return double.TryParse("" + currentChar, out d);
+        }
+
+        private char NextChar()
+        {
+            if (cursor + 1 < input.Length)
+            {
+                cursor++;
+            }
+            else
+            {
+                return '\n';
+            }
+
+            return CurrentChar();
+        }
+
+        private char CurrentChar()
+        {
+            return input[cursor];
         }
     }
 }
