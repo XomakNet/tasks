@@ -180,6 +180,27 @@ namespace EvalTask
                 var calc = new Calculator("1/1");
                 Assert.AreEqual(1, calc.Calc(), 0.000001);
             }
+
+            [Test]
+            public void NegativeNumberAdd()
+            {
+                var calc = new Calculator("-5+6");
+                Assert.AreEqual(1, calc.Calc(), 0.000001);
+            }
+
+            [Test]
+            public void NegativNumberSub()
+            {
+                var calc = new Calculator("-38-4");
+                Assert.AreEqual(-42, calc.Calc(), 0.000001);
+            }
+
+            [Test]
+            public void ReverseReverseSignIfMinus()
+            {
+                var calc = new Calculator("-(-38-4)");
+                Assert.AreEqual(42, calc.Calc(), 0.000001);
+            }
         }
     }
 }
