@@ -48,7 +48,7 @@ namespace EvalTask
             {
                 string json = "{x:1,xx:2.2,yy:3,y:5}";
                 string expr = "x+xx+yy+y";
-                Assert.AreEqual("1+2,2+3+5", Replace(json, expr));
+                Assert.AreEqual("1+2.2+3+5", Replace(json, expr));
             }
         }
     }

@@ -28,11 +28,28 @@ namespace EvalTask
 	    public class EvalProgram_Should
 	    {
 	        [Test]
-	        public void DoSomething_WhenSomething()
+	        public void WorkOnNullJson()
 	        {
-                string json = "{x:1,xx:2.2,yy:3,y:5}";
+                string json = null;
+                string expr = "1+2-2+1";
+                Assert.AreEqual("2", DoThings(json, expr));
+            }
+
+	        [Test]
+	        public void WorkWithEmptyJson()
+	        {
+                string json = "{}";
+                string expr = "1+2-2+1";
+                Assert.AreEqual("2", DoThings(json, expr));
+            }
+          
+
+            [Test]
+	        public void WorkWithJson()
+	        {
+                string json = "{x:1,xx:2,yy:3,y:5}";
                 string expr = "x+xx+yy+y";
-                Assert.AreEqual("11,2", DoThings(json, expr));
+                Assert.AreEqual("11", DoThings(json, expr));
             }
 	    }
 	}
