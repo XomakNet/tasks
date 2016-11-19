@@ -117,18 +117,40 @@ namespace EvalTask
             Assert.AreEqual(2, calc.Calc());
         }
 
-        [Test]
-        public void SimpleAddOperationIsCorrect()
-        {
-            var calc = new Calculator("20+3");
-            Assert.AreEqual(23, calc.Calc());
-        }
 
         [Test]
         public void CheckIfCalcReturnEqualDoubleNumber()
         {
             var calc = new Calculator("1.234");
             Assert.AreEqual(1.234, calc.Calc(), 0.000001);
+        }
+
+        [Test]
+        public void SimpleAddOperationIsCorrect()
+        {
+            var calc = new Calculator("20+3");
+            Assert.AreEqual(23, calc.Calc(), 0.000001);
+        }
+
+        [Test]
+        public void SimpleEqualMultiplicationIsCorrect()
+        {
+            var calc = new Calculator("7*11");
+            Assert.AreEqual(77, calc.Calc(), 0.000001);
+        }
+
+        [Test]
+        public void NumberInBracesEqualToCalculated()
+        {
+            var calc = new Calculator("(2.12)");
+            Assert.AreEqual(2.12, calc.Calc(), 0.000001);
+        }
+
+        [Test]
+        public void OperationsPriorityIsCorrect()
+        {
+            var calc = new Calculator("2+3*2");
+            Assert.AreEqual(8, calc.Calc(), 0.000001);
         }
     }
 }
