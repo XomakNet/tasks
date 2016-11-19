@@ -21,7 +21,7 @@ namespace EvalTask
                 replaceDictionary.Add(v.Key, Convert.ToDouble(v.Value));
             
             return replaceDictionary.OrderByDescending(i => i.Key.Length)
-                .Aggregate(expression, (current, value) => current.Replace(value.Key, value.Value.ToString(CultureInfo.GetCultureInfo("en-US"))));
+                .Aggregate(expression, (current, value) => current.Replace(value.Key, value.Value.ToString(CultureInfo.InvariantCulture)));
         }
 
         [TestFixture]
