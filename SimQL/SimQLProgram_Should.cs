@@ -11,13 +11,12 @@ namespace SimQLTask
 		[Test]
 		public void SimSQLShould()
 		{
-			var results = SimQLProgram.ExecuteQueries(
-				"{" +
-				"'data': {'a':{'x':3.14}}, " +
-				"'queries': ['a.x', 'b.c']" +
-				"}");
-
-			Assert.AreEqual(new String[] {"a.x = 3.14", "b.c"}, results.ToArray());
+		    var results =
+		        SimQLProgram.ExecuteQueries(
+		            "{'data':{'empty':{},'ab':0,'x1':1,'x2':2,'y1':{'y2':{'y3':3}}},'queries':['empty','xyz','x1.x2','y1.y2.z','empty.foobar']}");
+            
+            Console.WriteLine();
+			Assert.AreEqual(new String[] {"empty", "xyz", "x1.x2", "y1.y2.z", "empty.foobar"}, results.ToArray());
 		}
 
         [Test]
