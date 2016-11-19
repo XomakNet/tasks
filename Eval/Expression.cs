@@ -10,5 +10,12 @@ namespace EvalTask
     {
         Expression left, right;
         char op;
+
+        public Expression(char oper, Expression result, Expression right2)
+        {
+            op = oper;
+            left = result;
+            right = right2;
+        }
     }
 }
