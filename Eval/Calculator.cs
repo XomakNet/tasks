@@ -21,10 +21,11 @@ namespace EvalTask
 
         public double Calc()
         {
-            //return calcTerm();
+            var ex = CalcAll();
             return 0;
         }
 
+<<<<<<< HEAD
         [Test]
         public void CheckIfCalcReturnEqualNumber()
         {
@@ -37,6 +38,11 @@ namespace EvalTask
         {
             var calc = new Calculator("20+3");
             Assert.AreEqual(23, calc.Calc());
+=======
+        private Expression CalcAll()
+        {
+            return calcTerm();
+>>>>>>> de2a4bb8dc30cd509f52dfca0c4bc911280d26e7
         }
 
         private Expression calcTerm()
@@ -57,13 +63,13 @@ namespace EvalTask
 
             if (IsDigit(CurrentChar()))
             {
-                result = parseInteger();
+                result = ParseInteger();
             }
             else if (CurrentChar() == '(')
             {
                 NextChar();
-                result = Calc();
-                skipNextChar();
+                result = CalcAll();
+                SkipNextChar();
             }
             else
             {
@@ -71,6 +77,27 @@ namespace EvalTask
             }
 
             return result;
+        }
+
+        private void SkipNextChar()
+        {
+            if (cursor + 1 < input.Length)
+            {
+                cursor++;
+            }
+        
+        }
+
+        private Expression ParseInteger()
+        {
+            String number = "";
+
+            do
+            {
+                number += CurrentChar();
+            } while (IsDigit(NextChar()));
+
+            return new Integer2(number);
         }
 
         private bool IsDigit(char currentChar)
