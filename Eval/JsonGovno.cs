@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
@@ -20,7 +21,7 @@ namespace EvalTask
                 replaceDictionary.Add(v.Key, Convert.ToDouble(v.Value));
             
             return replaceDictionary.OrderByDescending(i => i.Key.Length)
-                .Aggregate(expression, (current, value) => current.Replace(value.Key, value.Value.ToString()));
+                .Aggregate(expression, (current, value) => current.Replace(value.Key, value.Value.ToString(CultureInfo.GetCultureInfo("en-US"))));
         }
 
         [TestFixture]
