@@ -1,6 +1,7 @@
 ﻿﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+ using System.IO;
+ using System.Linq;
 using System.Text;
  using System.Text.RegularExpressions;
  using System.Threading.Tasks;
@@ -31,7 +32,10 @@ namespace EvalTask
         {
             var interpreter = new Interpreter();
             var kek = interpreter.Eval(expression);
-            return Convert.ToDouble(kek);
+            var result = Convert.ToDouble(kek);
+            if (double.IsInfinity(result))
+                throw new DivideByZeroException();
+            return result;
         }
 
         private AExpression CalcAll()
