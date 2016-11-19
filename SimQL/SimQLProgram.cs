@@ -3,8 +3,10 @@ using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using static System.String;
 
 namespace SimQLTask
 {
@@ -22,7 +24,6 @@ namespace SimQLTask
             var queries_results = new List<String>();
 
 		    var jObject = JObject.Parse(json);
-		    //var queries = jObject["queries"].ToObject<string[]>();
 		    var queries = ((JArray) jObject["queries"]).Select(v => v.Value<String>());
 		    var data = (JObject) jObject["data"];
 
@@ -44,7 +45,9 @@ namespace SimQLTask
                     }
 		        }
 
-		        queries_results.Add(String.Join(".", queryParams) + " = " + (valueResult.Value ?? 0));
+                CultureInfo cultureInfo = CultureInfo.CreateSpecificCulture("da-DK");
+
+                queries_results.Add(Join(".", queryParams) + " = " + valueResult.ToString("0.00", cultureInfo));
 		    }
 
             return queries_results;

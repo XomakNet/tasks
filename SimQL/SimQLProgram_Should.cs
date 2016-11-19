@@ -14,9 +14,9 @@ namespace SimQLTask
 			var results = SimQLProgram.ExecuteQueries(
 				"{" +
 				"'data': {'a':{'x':3.14,'b':{'c':15},'c':{'c':9}}}, " +
-				"'queries': ['a.b.c', 'a.x']}");
+				"'queries': ['a.x']}");
 
-			Assert.AreEqual(new String[] {"a.b.c = 15", "a.x = 3.14"}, results.ToArray());
+			Assert.AreEqual(new String[] {"a.x = 3.14"}, results.ToArray());
 		}
 
         [Test]
