@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NUnit.Framework;
 
 namespace EvalTask
 {
@@ -22,6 +23,20 @@ namespace EvalTask
         {
             //return calcTerm();
             return 0;
+        }
+
+        [Test]
+        public void CheckIfCalcReturnEqualNumber()
+        {
+            var calc = new Calculator("2");
+            Assert.AreEqual(2, calc.Calc());
+        }
+
+        [Test]
+        public void SimpleAddOperationIsCorrect()
+        {
+            var calc = new Calculator("20+3");
+            Assert.AreEqual(23, calc.Calc());
         }
 
         private Expression calcTerm()
