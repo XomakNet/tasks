@@ -12,7 +12,7 @@ namespace EvalTask
     {
         public static void Main(string[] args)
         {
-            string input = Console.In.ReadLine();
+            string input = Console.In.ReadLine()?.Replace(',', '.');
             string json = Console.In.ReadToEnd();
 
             string output;
