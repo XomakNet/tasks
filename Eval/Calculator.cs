@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -128,16 +128,17 @@ namespace EvalTask
             return input[cursor];
         }
 
-        [Test]
-        public void CheckIfCalcReturnEqualNumber()
-        {
-            var calc = new Calculator("2");
-            Assert.AreEqual(2, calc.Calc());
-        }
 
         [TestFixture]
         public class Calculator_Should
         {
+            [Test]
+            public void CheckIfCalcReturnEqualNumber()
+            {
+                var calc = new Calculator("2");
+                Assert.AreEqual(2, calc.Calc());
+            }
+
             [Test]
             public void CheckIfCalcReturnEqualDoubleNumber()
             {
@@ -165,13 +166,21 @@ namespace EvalTask
                 var calc = new Calculator("(2,12)");
                 Assert.AreEqual(2.12, calc.Calc(), 0.000001);
             }
-
+            
             [Test]
             public void OperationsPriorityIsCorrect()
             {
                 var calc = new Calculator("2+3*2");
                 Assert.AreEqual(8, calc.Calc(), 0.000001);
             }
+
+            [Test]
+            public void DivisionByOne()
+            {
+                var calc = new Calculator("1/1");
+                Assert.AreEqual(1, calc.Calc(), 0.000001);
+            }
         }
     }
 }
+

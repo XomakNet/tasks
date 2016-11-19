@@ -31,7 +31,7 @@ namespace EvalTask
                     case '*': return result * right.Calculate();
                     case '/':
                         double rightCalc = right.Calculate();
-                        if (rightCalc < 0.0000000001)
+                        if (Math.Abs(rightCalc) > 0.0000000001)
                         {
                             return result / rightCalc;
                         }
