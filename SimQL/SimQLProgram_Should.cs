@@ -17,7 +17,7 @@ namespace SimQLTask
 				"'queries': ['a.x']" +
 				"}");
 
-			Assert.AreEqual(new String[] {"a.x = 3,14"}, results.ToArray());
+			Assert.AreEqual(new String[] {"a.x = 3.14"}, results.ToArray());
 		}
 
         [Test]

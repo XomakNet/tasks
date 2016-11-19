@@ -53,7 +53,7 @@ namespace SimQLTask
 
                 CultureInfo cultureInfo = CultureInfo.CreateSpecificCulture("da-DK");
                 
-                queriesResults.Add(Join(".", queryParams) + " = " + valueResult.Replace('.', ','));
+                queriesResults.Add(Join(".", queryParams) + " = " + valueResult);
 		    }
 
             return queriesResults;
