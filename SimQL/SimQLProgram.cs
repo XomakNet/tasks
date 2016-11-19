@@ -27,24 +27,24 @@ namespace SimQLTask
 		    var data = (JObject) jObject["data"];
 
 
-		    foreach (var query_path in queries.Select(q => q.Split('.')))
+		    foreach (var queryParams in queries.Select(q => q.Split('.')))
 		    {
-		        var temp_result = data;
-		        JValue value_result = null;
-		        var tmp_str = "";
-		        foreach (var query_param in query_path)
+		        var tempResult = data;
+		        JValue valueResult = null;
+		        
+		        foreach (var queryParam in queryParams)
 		        {
 		            try
 		            {
-		                temp_result = (JObject) temp_result[query_param];
+		                tempResult = (JObject) tempResult[queryParam];
 		            }
 		            catch
 		            {
-                        value_result = (JValue)temp_result[query_param];
+                        valueResult = (JValue)tempResult[queryParam];
                     }
 		        }
 
-		        queries_results.Add(String.Join(".", query_path) + " = " + value_result);
+		        queries_results.Add(String.Join(".", queryParams) + " = " + (valueResult.Value ?? 0));
 		    }
 
             return queries_results;
