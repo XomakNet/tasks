@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
  using System.Text.RegularExpressions;
  using System.Threading.Tasks;
-using NUnit.Framework;
+ using DynamicExpresso;
+ using NUnit.Framework;
 
 namespace EvalTask
 {
@@ -16,35 +17,21 @@ namespace EvalTask
 
         public Calculator(string str)
         {
-            input = Preprocess(str);
+            input = str;
             cursor = 0;
-        }
-
-        private string Preprocess(string str)
-        {
-            var r = new Regex("^-");
-            str = r.Replace(str, "0-");
-
-            r = new Regex("([^0-9])-");
-            str = r.Replace(str, "$1 0-");
-            
-            r = new Regex(" ");
-            str = r.Replace(str, "");
-
-            return str;
         }
 
         public double Calc()
         {
-            var ex = CalcAll();
-            //return Eval(input);
-            return ex.Calculate();
+            //var ex = CalcAll();
+            return Eval(input);
         }
 
-        static Double Eval(String expression)
+        static double Eval(String expression)
         {
-            System.Data.DataTable table = new System.Data.DataTable();
-            return Convert.ToDouble(table.Compute(expression, String.Empty));
+            var interpreter = new Interpreter();
+            var kek = interpreter.Eval(expression);
+            return Convert.ToDouble(kek);
         }
 
         private AExpression CalcAll()
@@ -164,7 +151,7 @@ namespace EvalTask
             [Test]
             public void CheckIfCalcReturnEqualDoubleNumber()
             {
-                var calc = new Calculator("1,234");
+                var calc = new Calculator("1.234");
                 Assert.AreEqual(1.234, calc.Calc(), 0.000001);
             }
 
@@ -185,7 +172,7 @@ namespace EvalTask
             [Test]
             public void NumberInBracesEqualToCalculated()
             {
-                var calc = new Calculator("(2,12)");
+                var calc = new Calculator("(2.12)");
                 Assert.AreEqual(2.12, calc.Calc(), 0.000001);
             }
             
