@@ -46,10 +46,6 @@ namespace SimQLTask
 		            else
 		            {
                         valueResult = tempResult[queryParam].Value<string>();
-		                if (queryParam.Equals("x"))
-		                {
-		                    throw new Exception("3.14".Equals(valueResult).ToString());
-		                }
                     }
 
 
