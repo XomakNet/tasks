@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Globalization;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
+using System.Threading;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
@@ -19,9 +21,9 @@ namespace EvalTask
 		}
 
         private static string DoThings(string json, string input)
-	    {
+        {
             var replaced = JsonReplacer.Replace(json, input);
-            return new Calculator(replaced).Calc().ToString();
+            return new Calculator(replaced).Calc().ToString(CultureInfo.InvariantCulture);
         }
 
 	    [TestFixture]
