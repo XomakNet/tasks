@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -128,6 +128,7 @@ namespace EvalTask
             return input[cursor];
         }
 
+
         [TestFixture]
         public class Calculator_Should
         {
@@ -165,7 +166,7 @@ namespace EvalTask
                 var calc = new Calculator("(2,12)");
                 Assert.AreEqual(2.12, calc.Calc(), 0.000001);
             }
-
+            
             [Test]
             public void OperationsPriorityIsCorrect()
             {
@@ -182,3 +183,4 @@ namespace EvalTask
         }
     }
 }
+

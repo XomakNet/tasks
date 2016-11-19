@@ -6,11 +6,8 @@ namespace EvalTask
 	{
 		static void Main(string[] args)
 		{
-		    string input = Console.In.ReadLine();//ReadToEnd();
-
-
-
-			string output = new Calculator(input).Calc().ToString();
+		    string input = Console.In.ReadLine();//ReadToEnd(); // 
+            string output = new Calculator(input).Calc().ToString();
 			Console.WriteLine(output);
 		}
 
