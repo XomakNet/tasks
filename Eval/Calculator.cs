@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NUnit.Framework;
 
 namespace EvalTask
 {
@@ -125,6 +126,27 @@ namespace EvalTask
         private char CurrentChar()
         {
             return input[cursor];
+        }
+
+        [Test]
+        public void CheckIfCalcReturnEqualNumber()
+        {
+            var calc = new Calculator("2");
+            Assert.AreEqual(2, calc.Calc());
+        }
+
+        [Test]
+        public void SimpleAddOperationIsCorrect()
+        {
+            var calc = new Calculator("20+3");
+            Assert.AreEqual(23, calc.Calc());
+        }
+
+        [Test]
+        public void CheckIfCalcReturnEqualDoubleNumber()
+        {
+            var calc = new Calculator("1.234");
+            Assert.AreEqual(1.234, calc.Calc(), 0.000001);
         }
     }
 }
