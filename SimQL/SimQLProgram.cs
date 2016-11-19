@@ -31,7 +31,7 @@ namespace SimQLTask
 		    foreach (var queryParams in queries.Select(q => q.Split('.')))
 		    {
 		        var tempResult = data;
-		        string valueResult = null;
+		        string valueResult = "";
 		        JToken currValue;
 
 		        foreach (var queryParam in queryParams)
