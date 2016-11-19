@@ -2,6 +2,7 @@
 using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
+using NUnit.Framework;
 
 namespace EvalTask
 {
@@ -16,5 +17,14 @@ namespace EvalTask
 			Console.WriteLine(output);
 		}
 
+	    [TestFixture]
+	    public class EvalProgram_Should
+	    {
+	        [Test]
+	        public void DoSomething_WhenSomething()
+	        {
+
+	        }
+	    }
 	}
 }
