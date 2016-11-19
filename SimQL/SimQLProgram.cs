@@ -44,22 +44,16 @@ namespace SimQLTask
 
 		            if (tempResult.TryGetValue(queryParam, out currValue))
 		            {
-		                if (currValue != null)
+		                try
 		                {
-
-		                    try
-		                    {
-		                        tempResult = (JObject) currValue;
-		                    }
-		                    catch
+		                    tempResult = (JObject) currValue;
+		                }
+		                catch
+		                {
+		                    if (queryParam.Equals(queryParams[queryParams.Length - 1]))
 		                    {
 		                        valueResult = currValue.Value<string>();
 		                    }
-
-		                }
-		                else
-		                {
-                            valueResult = "";
                             break;
                         }
 		            }
