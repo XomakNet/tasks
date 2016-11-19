@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+ using System.Text.RegularExpressions;
+ using System.Threading.Tasks;
 using NUnit.Framework;
 
 namespace EvalTask
@@ -15,14 +16,35 @@ namespace EvalTask
 
         public Calculator(string str)
         {
-            input = str;
+            input = Preprocess(str);
             cursor = 0;
+        }
+
+        private string Preprocess(string str)
+        {
+            var r = new Regex("^-");
+            str = r.Replace(str, "0-");
+
+            r = new Regex("([^0-9])-");
+            str = r.Replace(str, "$1 0-");
+            
+            r = new Regex(" ");
+            str = r.Replace(str, "");
+
+            return str;
         }
 
         public double Calc()
         {
             var ex = CalcAll();
+            //return Eval(input);
             return ex.Calculate();
+        }
+
+        static Double Eval(String expression)
+        {
+            System.Data.DataTable table = new System.Data.DataTable();
+            return Convert.ToDouble(table.Compute(expression, String.Empty));
         }
 
         private AExpression CalcAll()
