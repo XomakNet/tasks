@@ -8,9 +8,9 @@ using NUnit.Framework;
 
 namespace EvalTask
 {
-    class EvalProgram
+	public class EvalProgram
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             string input = Console.In.ReadLine();
             string json = Console.In.ReadToEnd();
@@ -24,11 +24,9 @@ namespace EvalTask
             {
                 output = "error";
             }
-
-            Console.WriteLine(output);
         }
 
-        private static string DoThings(string json, string input)
+        public static string DoThings(string json, string input)
         {
             var replaced = JsonReplacer.Replace(json, input);
             return new Calculator(replaced).Calc().ToString(CultureInfo.InvariantCulture);
