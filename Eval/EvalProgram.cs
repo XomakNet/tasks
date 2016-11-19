@@ -24,6 +24,7 @@ namespace EvalTask
             {
                 output = "error";
             }
+            Console.WriteLine(output);
         }
 
         public static string DoThings(string json, string input)
