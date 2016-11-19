@@ -39,14 +39,20 @@ namespace SimQLTask
 		            {
 		                continue;
 		            }
-		            try
+		            if (tempResult[queryParam] is JObject)
 		            {
 		                tempResult = (JObject) tempResult[queryParam];
 		            }
-		            catch
+		            else
 		            {
                         valueResult = tempResult[queryParam].Value<string>();
+		                if (queryParam.Equals("x"))
+		                {
+		                    throw new Exception("3.14".Equals(valueResult).ToString());
+		                }
                     }
+
+
 		        }
 
                 CultureInfo cultureInfo = CultureInfo.CreateSpecificCulture("da-DK");
