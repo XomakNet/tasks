@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace EvalTask
 {
-    class JsonGovno
+    class JsonReplacer
     {
         public static string Replace(string json, string expression)
         {

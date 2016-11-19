@@ -11,11 +11,18 @@ namespace EvalTask
 		static void Main(string[] args)
 		{
 		    string input = Console.In.ReadLine();
-		    string json = Console.In.ReadLine();//ReadToEnd();
-		    var kek = JsonGovno.Replace(json, input);
-            string output = new Calculator(JsonGovno.Replace(json,input)).Calc().ToString();
+		    string json = Console.In.ReadToEnd();
+            
+            string output = DoThings(json, input);
+
 			Console.WriteLine(output);
 		}
+
+        private static string DoThings(string json, string input)
+	    {
+            var replaced = JsonReplacer.Replace(json, input);
+            return new Calculator(replaced).Calc().ToString();
+        }
 
 	    [TestFixture]
 	    public class EvalProgram_Should
@@ -23,8 +30,10 @@ namespace EvalTask
 	        [Test]
 	        public void DoSomething_WhenSomething()
 	        {
-
-	        }
+                string json = "{x:1,xx:2.2,yy:3,y:5}";
+                string expr = "x+xx+yy+y";
+                Assert.AreEqual("11,2", DoThings(json, expr));
+            }
 	    }
 	}
 }
